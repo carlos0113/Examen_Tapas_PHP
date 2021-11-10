@@ -1,23 +1,19 @@
 <?php
-
-include 'head.php';
-                                             
+session_start();
+include 'head.php';             
 echo'<form action="" method="post">
             Selecciona la Tapa a la cual quieres votar
-                            <select name="codigo">
-                                  <option value="">Crujiente de Arroz con rollitos de atún y verduras en escabeche</option>
-                                  <option value="">La Mar de Pincho</option>
-                                  <option value="">Pincho el indiano de Cantabria</option>
-                                  <option value="">Tierra, sabor, tradición</option>
-                                  <option value="">Txerri Beltz</option>
-                                  <option value="">Esencia</option>
-                                  <option value="">Rebanada de Vida</option>
-                                 
-                                </select>
+                            <select name="codigo">';
+                              foreach($_SESSION["tapas"] as $clave=>$vector) {
+                                echo'<option value="'.$clave.'">'.$vector[0].'</option>';
+                              }
+                                echo'</select>
      <br> 
      <input name="votar" type="submit"  value="Votar"/>
-             
     </form>';
-
+if(isset($_REQUEST["votar"])) {
+  $codigo_tapa=$_REQUEST["codigo"];
+  $_SESSION["votos"][$codigo_tapa]++;
+}
  include 'pie.php';
 

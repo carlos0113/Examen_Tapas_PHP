@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'head.php';
                                              
  print' 
@@ -26,4 +26,8 @@ include 'head.php';
         </table>
     </form>
         </div>';
- include 'pie.php';
+if(isset($_REQUEST["submit"])) {
+  $codigo=$_REQUEST["codigo"];
+  unset($_SESSION["tapas"][$codigo]);
+}
+include 'pie.php';
